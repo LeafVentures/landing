@@ -1,17 +1,18 @@
-# KlimaKarma Landing Page
+# KlimaKarma
 
-**Live:** https://leafventures.github.io/landing/
+Live-Show Website: ein tropischer Kapok wächst im Hintergrund, darüber der Broadcast (Kapitel, CO₂, Ticker, Warteliste).
 
-## Seiten
-- `index.html` — Router (leitet automatisch weiter)
-- `desktop.html` — Grüne Version für Desktop/Tablet
-- `mobile.html` — Dark Version für Handy
+Ersetzt die alte statische Landingpage (`index.html` / `desktop.html` / `mobile.html`).
 
-## Newsletter
-Beide Seiten haben ein E-Mail-Signup Formular.
+## Stack
 
-## Deployment
-Push to `main` → GitHub Pages deployed automatisch.
+TanStack Start, React, Three.js / React Three Fiber, Tailwind.
 
-## Tech
-Reines HTML + CSS + JS. Keine Frameworks. Lädt in <1 Sekunde.
+## Lokal
+
+```bash
+npm install
+npm run dev
+```
+
+Die App braucht einen Server (Auth, Warteliste). GitHub Pages kann sie nicht ausliefern — deployen z. B. auf Vercel. `BETTER_AUTH_SECRET` und die Grok-Auth-Variablen kommen aus der Umgebung, nicht aus dem Repo.
