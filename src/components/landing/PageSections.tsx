@@ -6,7 +6,6 @@ import {
   Leaf,
   QrCode,
   ShieldCheck,
-  Star,
   Store,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -17,7 +16,7 @@ const STEPS = [
   {
     n: "01",
     title: "App herunterladen",
-    body: "Kostenlos für iOS und Android. Mit Health Connect oder Apple Health verbinden.",
+    body: "Kostenlos für iOS und Android. Zum Start in Stuttgart, Düsseldorf, Berlin und Mannheim.",
     icon: Leaf,
   },
   {
@@ -29,72 +28,16 @@ const STEPS = [
   {
     n: "03",
     title: "Impact tracken",
-    body: "Dein persönlicher und der kollektive CO₂-Fußabdruck aktualisieren sich in Echtzeit.",
+    body: "Deine bestätigten Aktionen werden in der App sichtbar.",
     icon: ShieldCheck,
   },
   {
     n: "04",
     title: "Rabatte einlösen",
-    body: "Code bei lokalen Partnern zeigen und echtes Geld sparen — kein Punkte-Poker.",
+    body: "Code bei lokalen Partnern zeigen und Rabatte einlösen.",
     icon: QrCode,
   },
 ];
-
-const REVIEWS = [
-  {
-    name: "Anna M.",
-    meta: "Berlin · 28",
-    stars: 5,
-    text: "Die Verifizierung über Health Connect fürs Rad-Pendeln ist genial. Ich sehe, wie mein Fußabdruck sinkt, und spare im Bio-Café. Endlich fühlt sich Nachhaltigkeit fair an.",
-  },
-  {
-    name: "Lukas T.",
-    meta: "Hamburg · 34",
-    stars: 4.5,
-    text: "Die Streaks motivieren täglich. Allein beim Fahrradladen 45 € gespart. Ein paar Challenges könnten abwechslungsreicher sein — insgesamt eine klare Empfehlung.",
-  },
-  {
-    name: "Sophie K.",
-    meta: "München · 25",
-    stars: 4.5,
-    text: "Foto-Proofs mit KI-Check geben das Gefühl, dass nur echte Aktionen zählen. In 4 Monaten über 120 € gespart. Übersichtlich und ehrlich.",
-  },
-  {
-    name: "Jonas B.",
-    meta: "Köln · 41",
-    stars: 4,
-    text: "Gute Idee, klare App. Die Tibber-Integration hat bei mir länger gedauert, läuft jetzt einwandfrei. Die lokalen Rabatte sind ein starker Anreiz.",
-  },
-  {
-    name: "Lena S.",
-    meta: "Berlin · 31",
-    stars: 5,
-    text: "Endlich ohne Greenwashing. Jede eingesparte Tonne ist durch echte Daten belegt. Der Community-Tracker zeigt, was wir zusammen bewegen.",
-  },
-  {
-    name: "Max R.",
-    meta: "München · 29",
-    stars: 4.5,
-    text: "Tägliche Challenges halten die Streak am Laufen, Partner-QR funktioniert reibungslos. Persönlicher Impact plus echte Rabatte — das überzeugt.",
-  },
-];
-
-function Stars({ value }: { value: number }) {
-  const full = Math.floor(value);
-  const half = value - full >= 0.5;
-  return (
-    <div className="flex gap-0.5 text-accent" aria-label={`${value} von 5`}>
-      {Array.from({ length: 5 }, (_, i) => (
-        <Star
-          key={i}
-          className="size-3.5"
-          fill={i < full || (i === full && half) ? "currentColor" : "none"}
-          strokeWidth={1.6}
-        />
-      ))}
-    </div>
-  );
-}
 
 function JoinForm() {
   const [email, setEmail] = useState("");
@@ -137,35 +80,6 @@ function JoinForm() {
 export function PageSections() {
   return (
     <div className="relative z-10">
-      <section id="impact" className="border-t border-line bg-bg/80 px-5 py-20 md:px-10 md:py-28">
-        <div className="mx-auto max-w-6xl">
-          <p className="text-[11px] tracking-[0.22em] text-accent uppercase">Gemeinsamer Impact</p>
-          <h2 className="mt-3 font-display text-4xl tracking-tight text-fg md:text-5xl">
-            Was wir zusammen schon erreicht haben
-          </h2>
-          <p className="mt-3 max-w-lg text-muted">
-            Jede Zahl basiert auf verifizierten Aktionen aus der App — Health Connect, Partner-QR,
-            Foto-Proofs.
-          </p>
-
-          <div className="mt-12 grid gap-4 sm:grid-cols-3">
-            {[
-              { k: "148", l: "Haushalte / Jahr" },
-              { k: "58.400", l: "gepflanzte Bäume (Äquivalent)" },
-              { k: "4,2 Mio.", l: "vermiedene Autokilometer" },
-            ].map((s) => (
-              <div
-                key={s.l}
-                className="rounded-xl border border-line bg-surface p-6"
-              >
-                <p className="font-display text-3xl tabular-nums tracking-tight text-fg">{s.k}</p>
-                <p className="mt-2 text-sm text-muted">{s.l}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id="how" className="border-t border-line bg-surface/90 px-5 py-20 md:px-10 md:py-28">
         <div className="mx-auto max-w-6xl">
           <p className="text-[11px] tracking-[0.22em] text-accent uppercase">In vier Schritten</p>
@@ -184,45 +98,6 @@ export function PageSections() {
                 <p className="mt-5 font-mono text-[11px] tabular-nums text-subtle">{step.n}</p>
                 <h3 className="mt-1 font-display text-xl text-fg">{step.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{step.body}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="reviews" className="border-t border-line bg-bg/85 px-5 py-20 md:px-10 md:py-28">
-        <div className="mx-auto max-w-6xl">
-          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <div>
-              <p className="text-[11px] tracking-[0.22em] text-accent uppercase">
-                Stimmen aus der Community
-              </p>
-              <h2 className="mt-3 font-display text-4xl tracking-tight text-fg md:text-5xl">
-                Was Nutzer wirklich sagen
-              </h2>
-            </div>
-            <div className="text-left md:text-right">
-              <p className="font-display text-4xl tabular-nums text-fg">4,4</p>
-              <p className="text-sm text-muted">aus 312 Bewertungen</p>
-            </div>
-          </div>
-          <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {REVIEWS.map((r) => (
-              <article
-                key={r.name}
-                className="rounded-xl border border-line bg-surface p-6"
-              >
-                <Stars value={r.stars} />
-                <p className="mt-4 text-sm leading-relaxed text-fg">{r.text}</p>
-                <div className="mt-6 flex items-center gap-3">
-                  <span className="grid size-9 place-items-center rounded-full bg-elevated text-xs font-medium text-accent">
-                    {r.name.slice(0, 1)}
-                  </span>
-                  <div>
-                    <p className="text-sm font-medium text-fg">{r.name}</p>
-                    <p className="text-xs text-subtle">{r.meta}</p>
-                  </div>
-                </div>
               </article>
             ))}
           </div>
@@ -251,7 +126,7 @@ export function PageSections() {
             {[
               "QR-Codes an der Kasse, keine neue Hardware",
               "Sichtbarer Impact für eure Nachbarschaft",
-              "DSGVO-konform, Made in Germany",
+              "Start in Stuttgart, Düsseldorf, Berlin und Mannheim",
             ].map((t) => (
               <li
                 key={t}
@@ -270,15 +145,15 @@ export function PageSections() {
             Bereit, deinen Impact sichtbar zu machen?
           </h2>
           <p className="mt-4 text-muted">
-            Tritt der Community bei und starte heute mit deiner ersten verifizierten Aktion.
+            Trag dich in die Warteliste ein. Wir melden uns, sobald KlimaKarma in deiner Stadt startet.
           </p>
           <div className="mt-8 flex justify-center">
             <JoinForm />
           </div>
           <p className="mt-3 text-xs text-subtle">100 % kostenlos. Jederzeit kündbar. Kein Spam.</p>
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <StoreLink label="App Store" hint="Download on the" />
-            <StoreLink label="Google Play" hint="Get it on" />
+            <StoreLink label="App Store" hint="Bald im" />
+            <StoreLink label="Google Play" hint="Bald bei" />
           </div>
         </div>
       </section>

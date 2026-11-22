@@ -47,14 +47,8 @@ export function NavBar() {
           <a href="#show" className="transition-colors duration-150 hover:text-fg">
             Live-Show
           </a>
-          <a href="#impact" className="transition-colors duration-150 hover:text-fg">
-            Impact
-          </a>
           <a href="#how" className="transition-colors duration-150 hover:text-fg">
             So funktioniert's
-          </a>
-          <a href="#reviews" className="transition-colors duration-150 hover:text-fg">
-            Stimmen
           </a>
         </nav>
 

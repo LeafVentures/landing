@@ -48,7 +48,7 @@ export const CHAPTERS: {
     at: 0.82,
     title: "Die Gemeinschaft",
     kicker: "Kapitel 05",
-    line: "2.847 Menschen. Ein Wald.",
+    line: "Viele Aktionen. Ein Wald.",
   },
 ];
 

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { Pause, Play, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useFeed } from "@/lib/live-feed";
 import {
   CHAPTERS,
   SHOW_DURATION,
   replayShow,
   showRuntime,
+  spawnBurst,
   toggleShow,
   type ShowPhase,
 } from "@/lib/show-runtime";
@@ -28,10 +28,6 @@ export function ShowOverlay() {
   const [playing, setPlaying] = useState(true);
   const [elapsed, setElapsed] = useState(0);
   const [titleOn, setTitleOn] = useState(true);
-  const events = useFeed((s) => s.events);
-  const co2 = useFeed((s) => s.co2);
-  const users = useFeed((s) => s.users);
-  const pushNext = useFeed((s) => s.pushNext);
 
   useEffect(() => {
     const onPhase = (p: ShowPhase) => setPhase(p);
@@ -61,17 +57,18 @@ export function ShowOverlay() {
     };
   }, []);
 
+  // Rein dekorative Lichtpunkte am Baum (früher an den Live-Ticker gekoppelt).
   useEffect(() => {
-    const kick = window.setTimeout(() => pushNext(), 1800);
+    const kick = window.setTimeout(() => spawnBurst(), 1800);
     const id = window.setInterval(() => {
       if (showRuntime.growth < 0.12 && !showRuntime.playing) return;
-      pushNext();
+      spawnBurst();
     }, 3400);
     return () => {
       window.clearTimeout(kick);
       window.clearInterval(id);
     };
-  }, [pushNext]);
+  }, []);
 
   useEffect(() => {
     setTitleOn(true);
@@ -182,50 +179,22 @@ export function ShowOverlay() {
                 <a href="#join">Kostenlos beitreten</a>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <a href="#impact">Impact ansehen</a>
+                <a href="#how">So funktioniert's</a>
               </Button>
             </div>
           </div>
 
           <div className="hidden w-full max-w-sm justify-self-end rounded-xl border border-line bg-bg/60 p-5 md:block">
             <p className="text-[11px] tracking-[0.18em] text-subtle uppercase">
-              Gemeinschaft
+              Pilotstädte
             </p>
-            <p className="mt-2 font-display text-4xl tabular-nums tracking-tight text-fg">
-              {co2.toLocaleString("de-DE")}
-            </p>
-            <p className="text-sm text-muted">kg CO₂ eingespart</p>
-            <p className="mt-3 text-sm text-subtle">
-              <span className="tabular-nums text-fg">{users.toLocaleString("de-DE")}</span>{" "}
-              aktive Nutzer in 12 Städten
+            <p className="mt-2 font-display text-2xl leading-snug tracking-tight text-fg">
+              Start in Stuttgart, Düsseldorf, Berlin und Mannheim
             </p>
           </div>
         </div>
       </div>
 
-      <div className="relative z-20 border-t border-line bg-bg/50 px-5 py-3 md:px-10">
-        <div className="mx-auto flex max-w-6xl flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
-          <p className="shrink-0 text-[11px] tracking-[0.2em] text-accent uppercase">
-            Live-Ticker
-          </p>
-          <ul className="flex min-h-6 flex-1 flex-col gap-1 overflow-hidden">
-            {events.slice(0, 1).map((e) => (
-              <li
-                key={e.id}
-                className="ticker-in flex flex-wrap items-baseline gap-x-2 text-sm text-fg"
-              >
-                <span className="font-medium">{e.name}</span>
-                <span className="text-subtle">{e.city}</span>
-                <span className="text-muted">{e.action}</span>
-                <span className="tabular-nums text-accent">−{e.co2.toFixed(1)} kg</span>
-              </li>
-            ))}
-            {events.length === 0 && (
-              <li className="text-sm text-muted">Warten auf die erste verifizierte Aktion…</li>
-            )}
-          </ul>
-        </div>
-      </div>
     </section>
   );
 }
