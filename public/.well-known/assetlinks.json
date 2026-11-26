@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "de.klimakarma.klimakarma",
+      "sha256_cert_fingerprints": [
+        "E8:B3:A3:16:CF:04:2A:BA:82:1D:2D:ED:BB:D3:32:43:7F:B0:28:6B:54:C3:31:AA:D1:B9:C5:AD:D1:74:CF:54"
+      ]
+    }
+  }
+]
