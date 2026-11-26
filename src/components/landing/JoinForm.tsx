@@ -14,7 +14,7 @@ export function JoinForm({ cta = "Kostenlos starten" }: { cta?: string }) {
     setPending(true);
     try {
       const { joinWaitlist } = await import("@/lib/waitlist");
-      await joinWaitlist({ data: email });
+      await joinWaitlist(email);
       setDone(true);
       toast.success("Du bist dabei. Wir melden uns mit dem App-Zugang.");
       setEmail("");
