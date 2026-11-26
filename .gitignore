@@ -10,3 +10,6 @@ dist
 .grok
 screenshots
 artifacts
+
+# Impeccable design screenshots
+.impeccable/

@@ -1,0 +1,10 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["TEAMID.de.klimakarma.klimakarma"],
+        "components": [{ "/": "/auth/*" }]
+      }
+    ]
+  }
+}

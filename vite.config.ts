@@ -150,6 +150,15 @@ export default defineConfig(({ command, isPreview }) => ({
       ? [
           nitro({
             preset: "vercel",
+            // App Links / Universal Links: AASA has no extension, Apple needs JSON.
+            routeRules: {
+              "/.well-known/apple-app-site-association": {
+                headers: { "content-type": "application/json" },
+              },
+              "/.well-known/assetlinks.json": {
+                headers: { "content-type": "application/json" },
+              },
+            },
             // Auto-registers server/middleware/* (the PWA install page +
             // manifest + head-tag middleware). Nitro v3 defaults serverDir to
             // false, so removing this silently unwires /?install=1 on deploys.
